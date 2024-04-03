@@ -12,7 +12,7 @@ export type OffersByProduct = {[productName: string]: Offer};
 
 export class ShoppingCart {
 
-    private readonly  items: ProductQuantity[] = [];
+    private readonly  items: ProductQuantity[] = []; // general mismatch of using item versus product terminology
     _productQuantities: ProductQuantities = {};
 
 
@@ -29,7 +29,7 @@ export class ShoppingCart {
     }
 
 
-    public addItemQuantity(product: Product, quantity: number): void {
+    public addItemQuantity(product: Product, quantity: number): void { // sounds like itemQuanity is something different than ProductQuantity
         let productQuantity = new ProductQuantity(product, quantity)
         this.items.push(productQuantity);
         let currentQuantity = this._productQuantities[product.name]
@@ -41,11 +41,11 @@ export class ShoppingCart {
 
     }
 
-    private increaseQuantity(product: Product, productQuantity: ProductQuantity, quantity: number) {
+    private increaseQuantity(product: Product, productQuantity: ProductQuantity, quantity: number) { // bit confusing, seems like it should be a void function - it doesnt actually increase the quantity
         return new ProductQuantity(product, productQuantity.quantity + quantity)
     }
 
-    handleOffers(receipt: Receipt,  offers: OffersByProduct, catalog: SupermarketCatalog ):void {
+    handleOffers(receipt: Receipt,  offers: OffersByProduct, catalog: SupermarketCatalog ):void { // does a lot (confusion between offers and discounts)
         for (const productName in this.productQuantities()) {
             const productQuantity = this._productQuantities[productName]
             const product = productQuantity.product;
@@ -53,7 +53,7 @@ export class ShoppingCart {
             if (offers[productName]) {
                 const offer : Offer = offers[productName];
                 const unitPrice: number= catalog.getUnitPrice(product);
-                let quantityAsInt = quantity;
+                let quantityAsInt = quantity; // sounds like it will perform a type change, but doesnt
                 let discount : Discount|null = null;
                 let x = 1;
                 if (offer.offerType == SpecialOfferType.ThreeForTwo) {
@@ -70,7 +70,7 @@ export class ShoppingCart {
                 } if (offer.offerType == SpecialOfferType.FiveForAmount) {
                     x = 5;
                 }
-                const numberOfXs = Math.floor(quantityAsInt / x);
+                const numberOfXs = Math.floor(quantityAsInt / x); // use of 'x' is confusing, not descriptive
                 if (offer.offerType == SpecialOfferType.ThreeForTwo && quantityAsInt > 2) {
                     const discountAmount = quantity * unitPrice - ((numberOfXs * 2 * unitPrice) + quantityAsInt % 3 * unitPrice);
                     discount = new Discount(product, "3 for 2", discountAmount);
