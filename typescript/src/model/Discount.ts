@@ -6,6 +6,6 @@ export class Discount {
 
     constructor(public readonly product: Product,
                 public readonly description: DiscountDescription,
-                public readonly discountAmount: number) {
+                public readonly amount: number) {
     }
 }

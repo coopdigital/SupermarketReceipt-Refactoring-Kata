@@ -13,7 +13,7 @@ export class Receipt {
             total += item.totalPrice;
         }
         for ( let discount of this.discounts) {
-            total -= discount.discountAmount;
+            total -= discount.amount;
         }
         return total;
     }
