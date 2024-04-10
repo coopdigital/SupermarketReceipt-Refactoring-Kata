@@ -9,8 +9,8 @@ import {ProductUnit} from "../src/model/ProductUnit"
 import {assert} from "chai";
 
 describe('Supermarket', () => {
-    describe('Special offer types', () => {
-        it('Ten percent discount', () => {
+    describe('Special offers', () => {
+        it('should not apply to non-discounted items', () => {
             // ARRANGE
             const catalog: SupermarketCatalog = new FakeCatalog();
             const toothbrush: Product = new Product("toothbrush", ProductUnit.Each);
