@@ -3,8 +3,8 @@ import {Product} from "../src/model/Product"
 import {SupermarketCatalog} from "../src/model/SupermarketCatalog"
 import {Receipt} from "../src/model/Receipt"
 import {ShoppingCart} from "../src/model/ShoppingCart"
-import {Teller} from "../src/model/Teller"
-import {SpecialOfferType} from "../src/model/SpecialOfferType"
+import {Checkout} from "../src/model/Checkout"
+import {OfferType} from "../src/model/OfferType"
 import {ProductUnit} from "../src/model/ProductUnit"
 import {assert} from "chai";
 
@@ -18,14 +18,14 @@ describe('Supermarket', () => {
             const apples: Product = new Product("apples", ProductUnit.Kilo);
             catalog.addProduct(apples, 1.99);
     
-            const teller: Teller = new Teller(catalog);
-            teller.addSpecialOffer(SpecialOfferType.TenPercentDiscount, toothbrush, 10.0);
+            const checkout: Checkout = new Checkout(catalog);
+            checkout.addSpecialOffer(OfferType.TenPercentDiscount, toothbrush, 10.0);
     
             const cart: ShoppingCart = new ShoppingCart();
             cart.addItemQuantity(apples, 2.5);
     
             // ACT
-            const receipt: Receipt = teller.checksOutArticlesFrom(cart);
+            const receipt: Receipt = checkout.checksOutArticlesFrom(cart);
     
             // ASSERT
             assert.approximately(receipt.getTotalPrice(), 4.975, 0.01);

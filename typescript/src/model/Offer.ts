@@ -1,9 +1,9 @@
 import {Product} from "./Product"
-import {SpecialOfferType} from "./SpecialOfferType"
+import {OfferType as OfferType} from "./OfferType"
 
 export class Offer {
 
-    public constructor(public readonly offerType: SpecialOfferType,
+    public constructor(public readonly offerType: OfferType,
                        public readonly product: Product,
                        public readonly argument: number) {
     }

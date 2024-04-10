@@ -3,16 +3,16 @@ import {OffersByProduct, ShoppingCart} from "./ShoppingCart"
 import {Product} from "./Product"
 import {Receipt} from "./Receipt"
 import {Offer} from "./Offer"
-import {SpecialOfferType} from "./SpecialOfferType"
+import {OfferType} from "./OfferType"
 
-export class Teller {
+export class Checkout {
 
     private offers: OffersByProduct = {};
 
     public constructor(private readonly catalog: SupermarketCatalog ) {
     }
 
-    public addSpecialOffer(offerType: SpecialOfferType , product: Product, argument: number): void {
+    public addSpecialOffer(offerType: OfferType , product: Product, argument: number): void {
         this.offers[product.name] = new Offer(offerType, product, argument);
     }
 
